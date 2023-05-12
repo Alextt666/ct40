@@ -1,18 +1,16 @@
 <template>
   <div class="dashbord">
-    <div class="Dashbord-head-component">
-      Dashbord-head-component
-    </div>
-    <div class="Dashbord-content-component">
-        Dashbord-content-component
-    </div>
+    <head-nav />
+    <head-content />
   </div>
 </template>
-<script setup></script>
+<script setup>
+import HeadNav from "@/components/Headers/index.vue";
+import HeadContent from "@/components/DashContent/index.vue";
+</script>
 <style>
 .dashbord {
   background: transparent;
   color: white;
-
 }
 </style>

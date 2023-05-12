@@ -28,16 +28,27 @@ import "swiper/css/pagination"; // 轮播图底面的小圆点
 import { Autoplay, Pagination, Scrollbar } from "swiper";
 // 在modules加入要使用的模块
 const modules = [Autoplay, Pagination, Scrollbar];
-const onSwiper = (swiper) => {
-  console.log(swiper);
-};
-const onSlideChange = () => {
-  console.log("slide change");
-};
+// const onSwiper = (swiper) => {
+//   console.log(swiper);
+// };
+// const onSlideChange = () => {
+//   console.log("slide change");
+// };
 </script>
-<style>
+<style lang="scss">
 .swiper {
   width: 100%;
-  height: 95%;
+  height: 93%;
 }
+</style>
+
+<style lang="scss" scoped>
+	.swiper:deep() {
+		.swiper-pagination-bullet {
+				background-color: white;
+                width: 45px;
+                height: 6px;
+                border-radius: 70px;
+			}
+    }
 </style>
