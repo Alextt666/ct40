@@ -12,7 +12,7 @@ import HeadRight from './Right.vue';
 .dashbord-head {
   width: 100%;
   box-sizing: border-box;
-  height: 200px;
+  height: 180px;
   display: flex;
   justify-content: space-between;
   padding: 45px 75px;

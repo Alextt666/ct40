@@ -38,7 +38,7 @@ const modules = [Autoplay, Pagination, Scrollbar];
 <style lang="scss">
 .swiper {
   width: 100%;
-  height: 93%;
+  height: 95%;
 }
 </style>
 
