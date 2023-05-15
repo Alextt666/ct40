@@ -1,22 +1,21 @@
 <template>
   <div class="content-left">
     <div class="today-title">今日课程</div>
-    <NoClass v-if="true" />
-    <HaveClass v-else />
-    
-
-    
+    <have-class v-if="isClassToday" />
+    <NoClass v-else />
   </div>
 </template>
 <script setup>
 import NoClass from "./LeftTop/NoClass.vue";
 import HaveClass from "./LeftTop/HaveClass.vue";
+import { reactive } from "vue";
+let isClassToday = reactive(false);
 </script>
 <style lang="scss" scoped>
 .content-left {
   width: 701px;
   height: 461px;
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.12);
   box-shadow: 8px 9px 19px 0px
     rgba(
       30.968315452337265,
