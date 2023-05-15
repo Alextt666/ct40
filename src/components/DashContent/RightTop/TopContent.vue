@@ -6,9 +6,11 @@
       </template>
     </div>
     <div class="top-detail">
-      <DetailItem :list="screenList" :only-text="false" />
-      <DetailItem :list="cameraList" :only-text="false" point-width="true" />
-      <DetailItem :list="networkList" :only-text="false" />
+      <DetailItem :list="screenList" :only-text="false">大屏</DetailItem>
+      <DetailItem :list="cameraList" :only-text="false" point-width="true"
+        >摄像机</DetailItem
+      >
+      <DetailItem :list="networkList" :only-text="false">已连接</DetailItem>
       <DetailItem :list="spaceList" :only-text="true" />
       <DetailItem :list="['当前已是最新版本']" :only-text="true" />
     </div>

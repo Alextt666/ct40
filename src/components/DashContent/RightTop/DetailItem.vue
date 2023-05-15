@@ -8,7 +8,7 @@
             alt="screenicon"
             :class="[pointWidth ? 'point' : '']"
           />
-          <span> <span>大屏</span>{{ index + 1 }}</span>
+          <span> <slot></slot>{{ index + 1 }}</span>
         </div>
       </template>
     </template>
