@@ -1,9 +1,12 @@
 <template>
   <div class="content-right-top">
     <div class="top-title">系统状态</div>
+    <top-content></top-content>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import TopContent from "./TopContent.vue";
+</script>
 <style lang="scss" scoped>
 .content-right-top {
   height: 287px;
@@ -11,6 +14,8 @@
   border-radius: 15px 15px 15px 15px;
   opacity: 1;
   margin-bottom: 15px;
+  box-sizing: border-box;
+  padding: 17px 0 0 27px;
   .top-title {
     width: 72px;
     height: 26px;

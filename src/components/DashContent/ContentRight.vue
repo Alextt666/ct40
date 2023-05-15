@@ -6,7 +6,7 @@
 </template>
 <script setup>
 import RightBottom from "./RightBottom.vue";
-import RightTop from "./RightTop.vue";
+import RightTop from "./RightTop/RightTop.vue";
 </script>
 <style lang="scss" scoped>
 .content-right {
