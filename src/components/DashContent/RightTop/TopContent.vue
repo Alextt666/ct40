@@ -6,15 +6,18 @@
       </template>
     </div>
     <div class="top-detail">
-      <DetailItem :list="screenList.src" :only-text="false" />
-      <DetailItem :list="cameraList.src" :only-text="false" />
-      <DetailItem :list="['已用16.6G', '剩余12.9G']" :only-text="true" />
+      <DetailItem :list="screenList" :only-text="false" />
+      <DetailItem :list="cameraList" :only-text="false" point-width="true" />
+      <DetailItem :list="networkList" :only-text="false" />
+      <DetailItem :list="spaceList" :only-text="true" />
+      <DetailItem :list="['当前已是最新版本']" :only-text="true" />
     </div>
   </div>
 </template>
 <script setup>
-import { reactive, computed } from "vue";
+import { reactive, computed, toRefs } from "vue";
 import { HardStatus } from "@/utils/createImageUrl.js";
+import { getHardDeviceInfo } from "@/utils/getHardDeviceInfo.js";
 import DetailItem from "./DetailItem.vue";
 const classyList = reactive([
   "显示大屏：",
@@ -25,11 +28,24 @@ const classyList = reactive([
 ]);
 const screenStatus = new HardStatus("screen").createStatus();
 const cameraStatus = new HardStatus("camera").createStatus();
+const networkStatus = new HardStatus("net").createSingleStatus();
+const { diskUsed, diskFree } = toRefs(reactive(getHardDeviceInfo()));
+
+// 屏幕检测
 const screenList = computed(() => {
-  return screenStatus.filter((item) => item.status == 0)[0];
+  return screenStatus.filter((item) => item.status == 0)[0]?.src || [];
 });
+// 相机检测
 const cameraList = computed(() => {
-  return cameraStatus.filter((item) => item.status == 1)[0];
+  return cameraStatus.filter((item) => item.status == 1)[0]?.src || [];
+});
+// 网络检测
+const networkList = computed(() => {
+  return networkStatus.filter((item) => item.status == 1)[0]?.src || [];
+});
+// 空间检测
+const spaceList = computed(() => {
+  return [`已用${diskUsed.value}G`, `剩余${diskFree.value}G`];
 });
 </script>
 <style lang="scss" scoped>

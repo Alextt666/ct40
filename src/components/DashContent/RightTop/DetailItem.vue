@@ -3,7 +3,11 @@
     <template v-if="!onlyText">
       <template v-for="(src, index) of detailRenderList">
         <div class="item-each">
-          <img :src="src" alt="screenicon" />
+          <img
+            :src="src"
+            alt="screenicon"
+            :class="[pointWidth ? 'point' : '']"
+          />
           <span> <span>大屏</span>{{ index + 1 }}</span>
         </div>
       </template>
@@ -22,6 +26,7 @@ import { defineProps } from "vue";
 const props = defineProps({
   list: Array,
   onlyText: Boolean,
+  pointWidth: Boolean,
 });
 const detailRenderList = props.list || [];
 </script>
@@ -35,18 +40,23 @@ const detailRenderList = props.list || [];
   color: #ffffff;
   line-height: 20px;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   .item-each {
-    width: 100px;
+    // width: 100px;
     height: 18px;
     line-height: 18px;
     display: flex;
+    margin-right: 25px;
   }
   img {
     width: 18px;
     height: 18px;
     margin-right: 5px;
+  }
+  .point {
+    width: 16px;
+    height: 20px;
   }
 }
 </style>
