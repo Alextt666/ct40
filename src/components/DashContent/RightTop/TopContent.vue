@@ -6,28 +6,16 @@
       </template>
     </div>
     <div class="top-detail">
-      <div class="detail-item">
-        <template v-for="(src, index) of screenList.src">
-          <div class="item-each">
-            <img :src="src" alt="screenicon" />
-            <span>{{ `大屏${index + 1}` }}</span>
-          </div>
-        </template>
-      </div>
-      <div class="detail-item">
-        <template v-for="(src, index) of cameraList.src">
-          <div class="item-each">
-            <img :src="src" alt="screenicon" style="width: 15px" />
-            <span>{{ `摄像机${index + 1}` }}</span>
-          </div>
-        </template>
-      </div>
+      <DetailItem :list="screenList.src" :only-text="false" />
+      <DetailItem :list="cameraList.src" :only-text="false" />
+      <DetailItem :list="['已用16.6G', '剩余12.9G']" :only-text="true" />
     </div>
   </div>
 </template>
 <script setup>
 import { reactive, computed } from "vue";
 import { HardStatus } from "@/utils/createImageUrl.js";
+import DetailItem from "./DetailItem.vue";
 const classyList = reactive([
   "显示大屏：",
   "摄像机:",
@@ -73,29 +61,6 @@ const cameraList = computed(() => {
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
-    .detail-item {
-      width: 100%;
-      height: 18px;
-      font-size: 14px;
-      font-family: Source Han Sans CN-Medium, Source Han Sans CN;
-      font-weight: 500;
-      color: #ffffff;
-      line-height: 20px;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      .item-each {
-        width: 100px;
-        height: 18px;
-        line-height: 18px;
-        display: flex;
-      }
-      img {
-        width: 18px;
-        height: 18px;
-        margin-right: 5px;
-      }
-    }
   }
 }
 </style>
