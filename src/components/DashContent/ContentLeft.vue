@@ -8,8 +8,8 @@
 <script setup>
 import NoClass from "./LeftTop/NoClass.vue";
 import HaveClass from "./LeftTop/HaveClass.vue";
-import { reactive } from "vue";
-let isClassToday = reactive(false);
+import { ref } from "vue";
+let isClassToday = ref(false);
 </script>
 <style lang="scss" scoped>
 .content-left {
