@@ -1,11 +1,13 @@
 <template>
   <div class="content-right-top">
-    <div class="top-title">系统状态</div>
+    <div class="top-title">{{ TOPTITLE }}</div>
     <top-content></top-content>
   </div>
 </template>
 <script setup>
+import { ref } from "vue";
 import TopContent from "./TopContent.vue";
+const TOPTITLE = ref("系统状态");
 </script>
 <style lang="scss" scoped>
 .content-right-top {

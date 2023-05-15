@@ -10,7 +10,9 @@
       <DetailItem :list="cameraList" :only-text="false" point-width="true"
         >摄像机</DetailItem
       >
-      <DetailItem :list="networkList" :only-text="false">已连接</DetailItem>
+      <DetailItem :list="networkList" :only-text="false" small-width="true"
+        >已连接</DetailItem
+      >
       <DetailItem :list="spaceList" :only-text="true" />
       <DetailItem :list="['当前已是最新版本']" :only-text="true" />
     </div>
@@ -31,15 +33,14 @@ const classyList = reactive([
 const screenStatus = new HardStatus("screen").createStatus();
 const cameraStatus = new HardStatus("camera").createStatus();
 const networkStatus = new HardStatus("net").createSingleStatus();
-const { diskUsed, diskFree } = toRefs(reactive(getHardDeviceInfo()));
-
+const { diskUsed, diskFree,cameraNum,screenNum } = toRefs(reactive(getHardDeviceInfo()));
 // 屏幕检测
 const screenList = computed(() => {
-  return screenStatus.filter((item) => item.status == 0)[0]?.src || [];
+  return screenStatus.filter((item) => item.status == screenNum.value)[0]?.src || [];
 });
 // 相机检测
 const cameraList = computed(() => {
-  return cameraStatus.filter((item) => item.status == 1)[0]?.src || [];
+  return cameraStatus.filter((item) => item.status == cameraNum.value)[0]?.src || [];
 });
 // 网络检测
 const networkList = computed(() => {

@@ -1,10 +1,17 @@
 <template>
   <div class="content-left">
     <div class="today-title">今日课程</div>
-    DashContent-left
+    <NoClass v-if="true" />
+    <HaveClass v-else />
+    
+
+    
   </div>
 </template>
-<script setup></script>
+<script setup>
+import NoClass from "./LeftTop/NoClass.vue";
+import HaveClass from "./LeftTop/HaveClass.vue";
+</script>
 <style lang="scss" scoped>
 .content-left {
   width: 701px;

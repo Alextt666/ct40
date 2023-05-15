@@ -6,7 +6,7 @@
           <img
             :src="src"
             alt="screenicon"
-            :class="[pointWidth ? 'point' : '']"
+            :class="[ pointWidth ? 'point' : smallWidth ? 'small' : '']"
           />
           <span> <slot></slot>{{ index + 1 }}</span>
         </div>
@@ -27,6 +27,7 @@ const props = defineProps({
   list: Array,
   onlyText: Boolean,
   pointWidth: Boolean,
+  smallWidth:Boolean
 });
 const detailRenderList = props.list || [];
 </script>
@@ -57,6 +58,10 @@ const detailRenderList = props.list || [];
   .point {
     width: 16px;
     height: 20px;
+  }
+  .small {
+    width: 13px;
+    height: 14px;
   }
 }
 </style>
