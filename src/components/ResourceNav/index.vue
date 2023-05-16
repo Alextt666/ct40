@@ -1,7 +1,10 @@
 <template>
   <div class="resource-nav">
     <back-home></back-home>
-    <my-select></my-select>
+    <div class="select-area">
+      <my-select placeholder="请选择学科"></my-select>
+      <my-select placeholder="请选择年级"></my-select>
+    </div>
   </div>
 </template>
 <script setup>
@@ -16,5 +19,11 @@ import BackHome from "@/components/MyComponents/BackHomeBtn.vue";
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.select-area {
+  width: 530px;
+  height: 42px;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
