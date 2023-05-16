@@ -19,7 +19,7 @@ const apps = reactive(
     { nick: "lark", name: "飞书" },
     { nick: "tc", name: "腾讯会议" },
   ].map(({ nick, name }) => {
-    return { nick, name, url: `../images/${nick}.png` };
+    return { nick, name, url: `./images/${nick}.svg` };
   })
 );
 
