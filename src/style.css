@@ -54,3 +54,13 @@ body {
 ::-webkit-scrollbar {
   background: transparent;
 }
+/* 
+
+.trans{
+  background: #f3f3f33a!important;
+  color: white;
+}
+
+.el-popper__arrow::before{
+  background: #f3f3f33a !important;
+} */

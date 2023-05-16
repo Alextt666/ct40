@@ -26,7 +26,7 @@ const btns = reactive(
 </script>
 <style lang="scss" scoped>
 .head-right {
-  width: 300px;
+  width: 230px;
   display: flex;
   justify-content: space-between;
   align-items: center;
