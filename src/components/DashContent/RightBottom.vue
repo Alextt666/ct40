@@ -2,11 +2,11 @@
   <div class="bottom-wrapper" @click="handleGoto">
     <div class="content-right-bottom" data-type="local">
       <p>本地录课</p>
-      <img src="../../assets/cemera.svg" alt="icon" class="img1" />
+      <img src="../../assets/cemera.svg" alt="local" class="img1" />
     </div>
     <div class="content-right-bottom" data-type="resource">
       <p>资源中心</p>
-      <img src="../../assets/file.svg" alt="icon" class="img2" />
+      <img src="../../assets/file.svg" alt="resource" class="img2" />
     </div>
   </div>
 </template>
@@ -14,7 +14,13 @@
 import { useRouter } from "vue-router";
 const currentRouter = useRouter();
 const handleGoto = function (e) {
-  currentRouter.push(`${e.target.dataset.type}`);
+  if (e.target.nodeName === "DIV") {
+    currentRouter.push(`${e.target.dataset.type}`);
+  } else if (e.target.nodeName === "IMG") {
+    currentRouter.push(`${e.target.alt}`);
+  } else {
+    return;
+  }
 };
 </script>
 <style lang="scss" scoped>
