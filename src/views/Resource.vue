@@ -10,4 +10,8 @@ import HeadNav from "@/components/Headers/index.vue";
 import ResourceNav from "@/components/ResourceNav/index.vue";
 import ResourceContent from "@/components/ResourceContent/index.vue";
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss">
+.resource {
+  width: 100%;
+}
+</style>

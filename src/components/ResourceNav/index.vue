@@ -16,6 +16,5 @@ import BackHome from "@/components/MyComponents/BackHomeBtn.vue";
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
 }
 </style>

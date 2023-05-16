@@ -11,9 +11,9 @@ import TopItem from "./TopItem.vue";
 <style lang="scss" scoped>
 .area-top {
   width: 970px;
-  height: 195px;
   margin-top: 11px;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
+  transform: translateX(-10px);
 }
 </style>

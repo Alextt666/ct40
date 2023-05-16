@@ -19,7 +19,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  margin-left: 15px;
   img {
     width: 203px;
     height: 128px;

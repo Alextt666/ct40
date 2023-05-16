@@ -16,7 +16,6 @@ import CenterArea from './CenterArea.vue';
 <style scoped lang="scss">
 .resource-content {
   width: 1100px;
-  height: 620px;
   margin: 0 auto;
   // transform: translateY(-40px);
   display: flex;
