@@ -1,6 +1,6 @@
 <template>
   <div class="head-left">
-    <img src="../../assets/logo.png" alt="logo" />
+    <img src="../../assets/logo.svg" alt="logo" />
     <div class="head-left-title">
       <div class="head-left-title-top">连平实验小学智慧终端</div>
       <span>2022年3月26日 12:00 AM</span>
