@@ -8,7 +8,7 @@
 import { useRouter } from "vue-router";
 const curRouter = useRouter();
 const backhome = () => {
-  curRouter.push("/");
+  curRouter.back();
 };
 </script>
 <style lang="scss" scoped>

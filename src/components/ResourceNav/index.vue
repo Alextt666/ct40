@@ -13,7 +13,6 @@ import BackHome from "@/components/MyComponents/BackHomeBtn.vue";
   width: 970px;
   height: 50px;
   margin: 0 auto;
-  border: 1px solid black;
   display: flex;
   justify-content: space-between;
   align-items: center;

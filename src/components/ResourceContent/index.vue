@@ -29,5 +29,8 @@ import CenterArea from './CenterArea.vue';
       height: 115px;
     }
   }
+  .right-arrow{
+    transform: translateX(-30px);
+  }
 }
 </style>
