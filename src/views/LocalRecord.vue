@@ -110,6 +110,7 @@ const input = ref("");
         font-size: 21px;
         font-weight: 700;
         margin-top: 20px;
+        cursor: pointer;
       }
     }
   }

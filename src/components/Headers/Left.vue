@@ -3,11 +3,24 @@
     <img src="../../assets/logo.svg" alt="logo" />
     <div class="head-left-title">
       <div class="head-left-title-top">连平实验小学智慧终端</div>
-      <span>2022年3月26日 12:00 AM</span>
+      <span>{{ currentTime }} {{ AMPM }}</span>
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import moment from "moment";
+import { ref,onBeforeUnmount } from "vue";
+import "moment/dist/locale/zh-cn";
+const currentTime = ref(moment().format("YYYY年MM月DD日 HH:mm"));
+const AMPM = +moment().format("HH") <= 12 ? "AM" : "PM";
+const timer = setInterval(() => {
+  currentTime.value = moment().format("YYYY年MM月DD日 HH:mm");
+  AMPM = +moment().format("HH") <= 12 ? "AM" : "PM";
+}, 60000);
+onBeforeUnmount(() => {
+  clearInterval(timer);
+});
+</script>
 <style scoped lang="scss">
 .head-left {
   display: flex;
@@ -27,7 +40,7 @@
       margin: 15px 0;
     }
     span {
-      width: 235px;
+      width: 255px;
       height: 20px;
       font-size: 18px;
       font-family: Source Han Sans CN-Medium, Source Han Sans CN;
