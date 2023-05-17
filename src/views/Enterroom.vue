@@ -12,6 +12,11 @@
 </template>
 <script setup>
 import { reactive } from "vue";
+import { store } from "@/store";
+import { getEnterMeetingUrl } from "@/api/Home.js";
+
+const talkCloudId = store.talkCloudId;
+const name = store.username;
 const apps = reactive(
   [
     { nick: "ck", name: "临时互动" },
@@ -24,25 +29,35 @@ const apps = reactive(
 );
 
 class Applicaiton {
+  constructor(talkCloudId, name) {
+    (this.talkCloudId = talkCloudId), (this.joinClassRoomName = name);
+  }
   handleEnter(type) {
     this[type]();
   }
   dd() {
-    console.log("dd");
+    window.open("dingtalk://");
   }
   ck() {
-    console.log("ck");
+    getEnterMeetingUrl({
+      talkCloudId: this.talkCloudId,
+      userType: 0,
+      joinClassRoomName: this.joinClassRoomName,
+      clientType: 0,
+    }).then((res) => {
+      window.location.href = res.data.enterRoomUrl;
+    });
   }
   lark() {
-    window.open('lark://')
+    window.open("lark://");
   }
   tc() {
-    console.log("tc");
+    console.log("wemeet://");
   }
 }
 
 const wakeupApp = function (e) {
-  const action = new Applicaiton();
+  const action = new Applicaiton(talkCloudId, name);
   const type = e.target.alt;
   if (type) {
     action.handleEnter(type);

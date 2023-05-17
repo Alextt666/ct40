@@ -1,10 +1,10 @@
 <template>
   <div class="head-right">
-    <template v-for="{name,icon,url} of btns">
-    <div class="icon-item">
-      <img :src="url" :alt="icon" />
-      <span>{{ name }}</span>
-    </div>
+    <template v-for="{ name, icon, url, nickId } of btns">
+      <div class="icon-item" :id="nickId">
+        <img :src="url" :alt="icon" />
+        <span>{{ name }}</span>
+      </div>
     </template>
   </div>
 </template>
@@ -12,9 +12,9 @@
 import { reactive } from "vue";
 const btns = reactive(
   [
-    { name: "远程协助", icon: "sunlight" },
-    { name: "重启", icon: "restart" },
-    { name: "关机", icon: "shutdown" },
+    { name: "远程协助", icon: "sunlight", nickId: "sunflower" },
+    { name: "重启", icon: "restart", nickId: "restart" },
+    { name: "关机", icon: "shutdown", nickId: "shutdown" },
   ].map(({ name, icon }) => {
     return {
       name,
@@ -30,14 +30,14 @@ const btns = reactive(
   display: flex;
   justify-content: space-between;
   align-items: center;
-  .icon-item{
+  .icon-item {
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-}
+  }
   img {
     width: 45px;
     height: 45px;

@@ -47,5 +47,5 @@ export function superCourse(params) {
   return request({ url: `/api/superCourse/list`, method: "get", params });
 }
 export function getEnterMeetingUrl(data) {
-  return request(`/api/getEnterMeetingUrl`, "post", "", data);
+  return request({ url: `/api/getEnterMeetingUrl`, method: "post", data });
 }
