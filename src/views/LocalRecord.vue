@@ -3,7 +3,7 @@
     <div class="record-wrap">
       <div class="record-nav">
         <div class="record-title">选择录课</div>
-        <img src="../assets/close.svg" alt="closeicon" @click="backHome"/>
+        <img src="../assets/close.svg" alt="closeicon" @click="backHome" />
       </div>
       <div class="record-select">
         <el-select
@@ -13,7 +13,7 @@
           size="large"
         >
           <el-option
-            v-for="item in options"
+            v-for="item in gradeList"
             :key="item.value"
             :label="item.label"
             :value="item.value"
@@ -56,9 +56,11 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { store } from "@/store";
 const curRouter = useRouter();
-const backHome = ()=> curRouter.push('/')
+const backHome = () => curRouter.push("/");
 const input = ref("");
+const gradeList = store.grades;
 </script>
 <style lang="scss" scoped>
 .record {

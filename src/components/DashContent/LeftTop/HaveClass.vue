@@ -1,20 +1,33 @@
 <template>
   <div class="hasclass">
     <div class="wrapper">
-      <template v-for="item in 6">
+      <template
+        v-for="{
+          startTime,
+          endTime,
+          subjectName,
+          classesName,
+          offlineTeacher,
+          onlineTeacher,
+          courseName,
+          id
+        } in curtodayList"
+      >
         <div class="hasclass-item">
           <div class="item-left">
-            <div class="left-top">09:45 - 10:30</div>
+            <div class="left-top">{{ startTime }} - {{ endTime }}</div>
             <div class="left-bottom">
-              <div class="left-bottom-subject">美术</div>
-              <div class="left-bottom-classname">五（1）班</div>
+              <div class="left-bottom-subject">{{ subjectName }}</div>
+              <div class="left-bottom-classname">{{ classesName }}</div>
             </div>
           </div>
           <div class="item-medium">
-            <div class="medium-top">张树根/牛爱花</div>
-            <div class="medium-bottom">三个课堂技术解决方案解决</div>
+            <div class="medium-top">
+              {{ offlineTeacher }}/{{ onlineTeacher }}
+            </div>
+            <div class="medium-bottom">{{ courseName }}</div>
           </div>
-          <div class="item-right">
+          <div class="item-right" @click="handleGo(id)">
             <img src="./go.svg" alt="icon" />
           </div>
         </div>
@@ -23,8 +36,21 @@
   </div>
 </template>
 <script setup>
+import { getEnterRoomUrl } from '@/api/Home';
+const props = defineProps({
+  todayList: Array,
+});
+const curtodayList = props.todayList;
 
-
+const handleGo = function(roomId){
+  getEnterRoomUrl(roomId).then(res=>{
+    if(res?.enterRoomUrl){
+      window.open(res.enterRoomUrl);
+    }else{
+    ElMessage.error('当前上课地址有误! 请联系管理员')
+    }
+  })
+}
 </script>
 <style lang="scss" scoped>
 .hasclass {
@@ -89,11 +115,13 @@
         .medium-top {
           width: 150px;
           height: 23px;
+          text-align: left;
         }
         .medium-bottom {
           margin-top: 23px;
           width: 245px;
           height: 23px;
+          text-align: left;
         }
       }
       .item-right {

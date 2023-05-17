@@ -16,6 +16,7 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
   ],
+  envDir: "env",
   base: "./",
   resolve: {
     alias: {
