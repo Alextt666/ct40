@@ -101,6 +101,8 @@ const confirmSubmit = () => {
       .catch((err) => {
         ElMessage.error("Error!" + err);
       });
+  }else{
+    ElMessage.error('排课信息不能为空! 请检查')
   }
 };
 </script>
