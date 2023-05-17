@@ -7,7 +7,7 @@
       </div>
       <div class="record-select">
         <el-select
-          v-model="value"
+          v-model="gradeValue"
           class="m-2"
           placeholder="请选择年级"
           size="large"
@@ -20,26 +20,26 @@
           />
         </el-select>
         <el-select
-          v-model="value"
+          v-model="subjectValue"
           class="m-2"
           placeholder="请选择科目"
           size="large"
         >
           <el-option
-            v-for="item in options"
+            v-for="item in subjectList"
             :key="item.value"
             :label="item.label"
             :value="item.value"
           />
         </el-select>
         <el-select
-          v-model="value"
+          v-model="teacherValue"
           class="m-2"
           placeholder="请选择教师"
           size="large"
         >
           <el-option
-            v-for="item in options"
+            v-for="item in teacherList"
             :key="item.value"
             :label="item.label"
             :value="item.value"
@@ -48,19 +48,53 @@
 
         <el-input placeholder="请输入课程名称" v-model="input"></el-input>
 
-        <button class="record-btn">确 认</button>
+        <button class="record-btn" @click="confirmSubmit">确 认</button>
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
+import { postCourseRecording } from "@/api/Home.js";
 import { store } from "@/store";
 const curRouter = useRouter();
 const backHome = () => curRouter.push("/");
 const input = ref("");
-const gradeList = store.grades;
+let gradeValue = ref("");
+let subjectValue = ref("");
+let teacherValue = ref("");
+const subjectList = reactive([]);
+const gradeList = reactive([]);
+const teacherList = reactive([]);
+const pushInWay = (res, target) => {
+  res.forEach((item) => target.push(item));
+};
+try {
+  store.getSubjectInOption().then((res) => pushInWay(res, subjectList));
+  store.getGradeInOption().then((res) => pushInWay(res, gradeList));
+  store
+    .getTeacherInOption(store.roomId)
+    .then((res) => pushInWay(res, teacherList));
+} catch (error) {
+  ElMessage.error("返回结果有误! 错误信息" + error);
+}
+
+const confirmSubmit = () => {
+  const validate =
+    input.value && gradeValue.value && subjectValue.value && teacherValue.value
+      ? true
+      : false;
+  if (validate) {
+    postCourseRecording({
+      classroomId: store.roomId,
+      gradeId: gradeValue.value,
+      subjectId: subjectValue.value,
+      teacherId: teacherValue.value,
+      courseName: input.value,
+    }).then(res=> console.log(res));
+  }
+};
 </script>
 <style lang="scss" scoped>
 .record {
