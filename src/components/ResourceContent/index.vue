@@ -12,6 +12,7 @@
 <script setup>
 import CenterArea from './CenterArea.vue';
 
+
 </script>
 <style scoped lang="scss">
 .resource-content {
@@ -23,6 +24,8 @@ import CenterArea from './CenterArea.vue';
   .arrow {
     cursor: pointer;
     margin-top: 40px;
+    height: 115px;
+
     img {
       width: 50px;
       height: 115px;

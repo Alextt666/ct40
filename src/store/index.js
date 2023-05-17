@@ -1,7 +1,14 @@
 import { reactive } from "vue";
-import { getSubjectInOption, getGradeInOption,getTeacherInOption } from "@/utils/factoryFun.js";
+import {
+  getSubjectInOption,
+  getSuperCourse,
+  getGradeInOption,
+  getTeacherInOption,
+} from "@/utils/factoryFun.js";
 const talkCloudId = window.localStorage.getItem("talkCloudId") || 0;
 const roomId = window.localStorage.getItem("roomId") || 178;
+const courseList = getSuperCourse();
+
 // 公用数据
 export const store = reactive({
   username: "alex",
@@ -9,5 +16,14 @@ export const store = reactive({
   roomId,
   getGradeInOption,
   getSubjectInOption,
-  getTeacherInOption
+  getTeacherInOption,
+  courseList,
+  commitCourseList(params) {
+    this.courseList.splice();
+    getSuperCourse(params).then((res) => {
+      res.forEach((item) => {
+        this.courseList.push(item);
+      });
+    });
+  },
 });

@@ -1,4 +1,4 @@
-import { getSubjectList, getTeacherList } from "@/api/Home.js";
+import { getSubjectList, getTeacherList, superCourse } from "@/api/Home.js";
 
 // 加工函数
 const getSubjectInOption = () => {
@@ -43,4 +43,25 @@ const getTeacherInOption = (roomId) => {
   });
 };
 
-export { getSubjectInOption, getGradeInOption, getTeacherInOption };
+// 课程
+const getSuperCourse = (params) => {
+  return new Promise((resolve) => {
+    superCourse(params || {}).then((res) => {
+      if (res.rows.length != 0) {
+        const options = res.rows.map((item) => {
+          return {
+            subjectId: item.subjectId,
+            subjectName: item.subjectName,
+            courseName: item.name,
+            cover: item.cover,
+          };
+        });
+        resolve(options);
+      } else {
+        resolve([]);
+      }
+    });
+  });
+};
+
+export { getSubjectInOption, getGradeInOption, getTeacherInOption,getSuperCourse };

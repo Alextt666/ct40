@@ -1,13 +1,17 @@
 <template>
   <div class="top-item">
     <img
-      src="https://th.bing.com/th/id/OIP.JtN_C23OlZotjN_s7Bvt-wHaHa?pid=ImgDet&rs=1"
-      alt=""
+      :src="itemInfo.cover"
+      alt="covericon"
     />
-    <div class="top-item-text">英语 · 人教PEP六年级下册（人教版）</div>
+    <div class="top-item-text">{{ itemInfo.subjectName }} · {{ itemInfo.courseName }}</div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+const props = defineProps({
+  itemInfo:Object
+})
+</script>
 <style lang="scss" scoped>
 .top-item {
   width: 230px;
@@ -20,6 +24,7 @@
   justify-content: center;
   align-items: center;
   margin-left: 15px;
+  cursor: pointer;
   img {
     width: 203px;
     height: 128px;

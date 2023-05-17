@@ -2,8 +2,8 @@
   <div class="resource-nav">
     <back-home></back-home>
     <div class="select-area">
-      <my-select placeholder="请选择学科"></my-select>
-      <my-select placeholder="请选择年级"></my-select>
+      <my-select placeholder="请选择学科" type="Subject"></my-select>
+      <my-select placeholder="请选择年级" type="Grade"></my-select>
     </div>
   </div>
 </template>

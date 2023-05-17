@@ -43,8 +43,8 @@ export function courseSection(params) {
   return request(`/api/courseSection/list/${params}`);
 }
 // 获取课件列表
-export function superCourse() {
-  return request(`/api/superCourse/list`);
+export function superCourse(params) {
+  return request({ url: `/api/superCourse/list`, method: "get", params });
 }
 export function getEnterMeetingUrl(data) {
   return request(`/api/getEnterMeetingUrl`, "post", "", data);

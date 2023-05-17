@@ -92,7 +92,15 @@ const confirmSubmit = () => {
       subjectId: subjectValue.value,
       teacherId: teacherValue.value,
       courseName: input.value,
-    }).then(res=> console.log(res));
+    })
+      .then((res) => {
+        if (res.code == 500) {
+          ElMessage.error("Error! 正常调用接口，但返回有误 msg:" + res.msg);
+        }
+      })
+      .catch((err) => {
+        ElMessage.error("Error!" + err);
+      });
   }
 };
 </script>
