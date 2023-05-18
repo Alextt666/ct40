@@ -19,9 +19,9 @@ watch(
   (newValue, oldValue) => {
     // console.log(newValue,'newValue');
     // newValue temp 449
-    courseSection(449).then((res) => {
+    courseSection(newValue).then((res) => {
       if (res.rows.length) {
-        bottomList.splice();
+        bottomList.splice(0,bottomList.length);
         res.rows.forEach((item) => {
           bottomList.push(item);
         });
@@ -30,6 +30,7 @@ watch(
     });
   }
 );
+
 </script>
 <style lang="scss" scoped>
 .area-bottom {

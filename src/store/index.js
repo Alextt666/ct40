@@ -18,10 +18,18 @@ export const store = reactive({
   getSubjectInOption,
   getTeacherInOption,
   courseList,
-  subCourseList:[],
+  subCourseList: [],
   commitCourseList(params) {
-    this.courseList.then(res=>{
-      console.log(this.courseList,'courselist')
-    })
+    getSuperCourse(params).then((res) => {
+      console.log(res,'res');
+      if (this.subCourseList.length != 0 && res.length != 0) {
+        // this.subCourseList.splice(0, this.subCourseList.length);
+        // res.forEach((item) => this.subCourseList.push(item));
+        this.subCourseList = res;
+      }
+      if (res.length != 0) {
+        res.forEach((item) => this.subCourseList.push(item));
+      }
+    });
   },
 });

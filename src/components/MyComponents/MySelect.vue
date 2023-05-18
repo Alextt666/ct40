@@ -31,7 +31,10 @@ store[`get${props.type}InOption`]().then((res) =>
 const handleChange = (type) => {
   // console.log(type);
   if (type == "Subject") {
-    store.commitCourseList({ subject: value.value });
+    store.commitCourseList({ subjectId: value.value });
+  }
+  if(type == 'Grade'){
+    store.commitCourseList({ gradeId: value.value });
   }
 };
 </script>
