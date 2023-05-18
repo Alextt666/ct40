@@ -6,7 +6,7 @@ import {
   getTeacherInOption,
 } from "@/utils/factoryFun.js";
 const talkCloudId = window.localStorage.getItem("talkCloudId") || 0;
-const roomId = window.localStorage.getItem("roomId") || 178;
+const roomId = window.localStorage.getItem("roomId") || 66;
 const courseList = getSuperCourse();
 
 // 公用数据
@@ -18,12 +18,10 @@ export const store = reactive({
   getSubjectInOption,
   getTeacherInOption,
   courseList,
+  subCourseList:[],
   commitCourseList(params) {
-    this.courseList.splice();
-    getSuperCourse(params).then((res) => {
-      res.forEach((item) => {
-        this.courseList.push(item);
-      });
-    });
+    this.courseList.then(res=>{
+      console.log(this.courseList,'courselist')
+    })
   },
 });

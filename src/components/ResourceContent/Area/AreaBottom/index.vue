@@ -1,7 +1,7 @@
 <template>
   <div class="area-bottom">
-    <template v-for="item in 12">
-      <BottomItem></BottomItem>
+    <template v-for="(item,index) in bottomList">
+      <BottomItem :itemInfo="item" :itemIndex=index></BottomItem>
     </template>
   </div>
 </template>
@@ -17,13 +17,15 @@ const bottomList = reactive([]);
 watch(
   () => props.bottomNum,
   (newValue, oldValue) => {
-    console.log(newValue,'newValue');
-    courseSection(newValue).then((res) => {
+    // console.log(newValue,'newValue');
+    // newValue temp 449
+    courseSection(449).then((res) => {
       if (res.rows.length) {
         bottomList.splice();
         res.rows.forEach((item) => {
           bottomList.push(item);
         });
+        console.log(bottomList);
       }
     });
   }

@@ -1,17 +1,36 @@
 <template>
   <div class="bottom-item">
-    <div class="item-title">1、水是有哪几部分组成</div>
+    <div class="item-title">{{ itemIndex + 1 }}、{{ itemInfo.name }}</div>
     <div class="item-wrap">
       <div class="item-link">
-        <a href="http://www.baidu.com" target="_blank">导学案：三年级下册科学试卷讲解-第1节</a>
+        <a target="_blank" :href="itemInfo.teachingPlan"
+          >导学案：{{ itemInfo.teachingPlanName }}</a
+        >
       </div>
-      <div class="item-link"><a href="">课件：买一些蚕和桑叶回来</a></div>
-      <div class="item-link"><a href="">作业：观察一杯水</a></div>
-      <div class="item-link"><a href="">微课：观察一杯水</a></div>
+      <div class="item-link">
+        <a :href="itemInfo.fileUrl" target="_blank" style="display: block"
+          >课件：{{ itemInfo.filename }}</a
+        >
+      </div>
+      <div class="item-link">
+        <a :href="itemInfo.taskDetailList[0].task"
+          >作业：{{ itemInfo.taskDetailList[0].taskName }}</a
+        >
+      </div>
+      <div class="item-link">
+        <a :href="itemInfo.microCourseDetailList[0].task"
+          >微课：{{ itemInfo.microCourseDetailList[0].taskName }}</a
+        >
+      </div>
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+const props = defineProps({
+  itemInfo: Object,
+  itemIndex: Number,
+});
+</script>
 <style lang="scss" scoped>
 .bottom-item {
   width: 309px;
@@ -36,13 +55,14 @@
     flex-direction: column;
     justify-content: space-around;
     .item-link {
-      width: 217px;
+      width: 255px;
       height: 17px;
       font-size: 12px;
       font-family: Source Han Sans CN-Regular, Source Han Sans CN;
       font-weight: 400;
       line-height: 15px;
       a {
+        // display: block;
         color: #8cdaff;
       }
     }

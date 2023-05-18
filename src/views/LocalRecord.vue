@@ -56,7 +56,7 @@
 <script setup>
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
-import { postCourseRecording } from "@/api/Home.js";
+import { postCourseRecording,getEnterRoomUrl } from "@/api/Home.js";
 import { store } from "@/store";
 const curRouter = useRouter();
 const backHome = () => curRouter.push("/");
@@ -97,12 +97,22 @@ const confirmSubmit = () => {
         if (res.code == 500) {
           ElMessage.error("Error! 正常调用接口，但返回有误 msg:" + res.msg);
         }
+        ElMessage.success('排课成功');
+        return res
+      }).then(res=>{
+        if(res?.data?.id){
+          return getEnterRoomUrl(res.data.id)
+        }
+      }).then(res=>{
+        const url = res.enterRoomUrl;
+        curRouter.push('/')
+        window.open(url);
       })
       .catch((err) => {
         ElMessage.error("Error!" + err);
       });
-  }else{
-    ElMessage.error('排课信息不能为空! 请检查')
+  } else {
+    ElMessage.error("排课信息不能为空! 请检查");
   }
 };
 </script>

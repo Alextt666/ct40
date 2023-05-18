@@ -4,6 +4,7 @@
     class="m-2"
     :placeholder="placeholder"
     size="large"
+    @change="handleChange(type)"
   >
     <el-option
       v-for="item in options"
@@ -27,8 +28,12 @@ let value = ref("");
 store[`get${props.type}InOption`]().then((res) =>
   res.forEach((item) => options.push(item))
 );
-
-
+const handleChange = (type) => {
+  // console.log(type);
+  if (type == "Subject") {
+    store.commitCourseList({ subject: value.value });
+  }
+};
 </script>
 <style lang="scss" scoped>
 :deep(.el-input) {
@@ -46,7 +51,6 @@ store[`get${props.type}InOption`]().then((res) =>
 :deep(::placeholder) {
   color: white;
 }
-
 
 :deep(.el-input__inner) {
   color: white;

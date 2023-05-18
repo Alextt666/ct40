@@ -1,18 +1,31 @@
 <template>
   <div class="resource-content">
-    <div class="left-arrow arrow">
+    <div class="left-arrow arrow" @click="prev">
       <img src="../../assets/left.svg" alt="lefticon" />
     </div>
-    <center-area></center-area>
-    <div class="right-arrow arrow">
+    <center-area :pageNum="pageNum" @nomore="onEmitNoMore"></center-area>
+    <div class="right-arrow arrow" @click="next">
       <img src="../../assets/right.svg" alt="righticon" />
     </div>
   </div>
 </template>
 <script setup>
-import CenterArea from './CenterArea.vue';
-
-
+import CenterArea from "./CenterArea.vue";
+import { ref } from "vue";
+const pageNum = ref(0);
+const onEmitNoMore = (num) => {
+  pageNum.value = num;
+};
+const next = () => {
+  pageNum.value++;
+};
+const prev = () => {
+  if (pageNum.value == 0) {
+    ElMessage.error("没有更多了");
+    return;
+  }
+  pageNum.value--;
+};
 </script>
 <style scoped lang="scss">
 .resource-content {
@@ -31,7 +44,7 @@ import CenterArea from './CenterArea.vue';
       height: 115px;
     }
   }
-  .right-arrow{
+  .right-arrow {
     transform: translateX(-30px);
   }
 }
