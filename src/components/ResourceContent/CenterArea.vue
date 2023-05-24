@@ -1,10 +1,5 @@
 <template>
   <div class="center-area">
-    <!-- <area-top
-      :propTopList="topList"
-      :pageNum="pageNum"
-      @onEmmitTopClick="handleTopClick"
-    ></area-top> -->
     <div class="area-top">
       <top-item
         v-for="item in topList"
@@ -20,7 +15,7 @@
 <script setup>
 import TopItem from "./Area/AreaTop/TopItem.vue";
 import AreaBottom from "./Area/AreaBottom/index.vue";
-import { reactive, ref, watch,getCurrentInstance } from "vue";
+import { reactive, ref, watch, getCurrentInstance } from "vue";
 import { store } from "@/store";
 import _ from "lodash";
 const props = defineProps({
@@ -29,10 +24,10 @@ const props = defineProps({
 let topList = reactive([]);
 let allList = reactive([]);
 let curList = reactive([]);
-const bottomNum = ref(0);
+const bottomNum = ref(999);
 const chunkLength = ref(0);
-const handleTopClick = (id) => {
-  bottomNum.value = id;
+const handleTopClick = (item) => {
+  bottomNum.value = item.id;
 };
 const emits = defineEmits(["nomore", "resetPage"]);
 
@@ -56,7 +51,10 @@ watch(
     curList = allList.filter((item) => item.subjectId == newValue);
     chunkLength.value = _.chunk(curList, 4).length;
     topList = _.chunk(curList, 4)[0];
-    instance.ctx.$forceUpdate()
+    if (topList) {
+      bottomNum.value = topList[0].id;
+    }
+    instance.ctx.$forceUpdate();
   }
 );
 watch(
@@ -66,11 +64,12 @@ watch(
     curList = allList.filter((item) => item.grade == newValue);
     chunkLength.value = _.chunk(curList, 4).length;
     topList = _.chunk(curList, 4)[0];
-    instance.ctx.$forceUpdate()
+    if (topList) {
+      bottomNum.value = topList[0].id;
+    }
+    instance.ctx.$forceUpdate();
   }
 );
-
-
 
 try {
   store.courseList.then((res) => {
