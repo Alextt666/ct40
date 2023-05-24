@@ -1,52 +1,24 @@
 <template>
   <div class="area-top">
-    <template v-if="isChange">
-      <template v-for="item in curList" :key="item.id">
-        <top-item :itemInfo="item" @click="emmitTopClick(item)"></top-item>
-      </template>
-    </template>
-    <template v-else>
-      <template v-for="item in curList" :key="item.id">
-        <top-item :itemInfo="item" @click="emmitTopClick(item)"></top-item>
-      </template>
+    <template v-for="item in curList" :key="item.id">
+      <top-item :itemInfo="item" @click="emmitTopClick(item)"></top-item>
     </template>
   </div>
 </template>
 <script setup>
-import { watch, ref, reactive } from "vue";
+import { reactive, watchEffect,isReactive } from "vue";
 import TopItem from "./TopItem.vue";
-import { store } from "@/store";
 import _ from "lodash";
 
 const props = defineProps({
-  topList: Array,
-  pageNum: Number,
+  propTopList: Object,
 });
 let curList = reactive([]);
-let isChange = ref(false);
-let allList = reactive([]);
-watch(
-  () => props.pageNum,
-  (newone) => {
-    curList = allList[newone]
-  }
-);
-watch(
-  () => props.topList,
-  (newValue, oldValue) => {
-    curList = newValue;
-  },
-  { immediate: true, deep: true }
-);
-watch(
-  () => store.subCourseList,
-  (newValue, oldValue) => {
-    isChange.value = !isChange.value;
-    allList = _.chunk(newValue, 4);
-    curList = allList[0];
-  },
-  { deep: true }
-);
+watchEffect(() => {
+  curList = props.propTopList;
+  console.log('change',curList);
+});
+
 const emit = defineEmits(["onEmmitTopClick"]);
 const emmitTopClick = (item) => {
   emit("onEmmitTopClick", item.subjectId);

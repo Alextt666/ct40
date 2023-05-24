@@ -1,17 +1,26 @@
 <template>
   <div class="center-area">
-    <area-top
-      :topList="topList"
-      :pageNum = 'pageNum'
+    <!-- <area-top
+      :propTopList="topList"
+      :pageNum="pageNum"
       @onEmmitTopClick="handleTopClick"
-    ></area-top>
+    ></area-top> -->
+    <div class="area-top">
+      <top-item
+        v-for="item in topList"
+        :key="item.id"
+        :itemInfo="item"
+        @click="handleTopClick(item)"
+      ></top-item>
+    </div>
+
     <area-bottom :bottomNum="bottomNum"></area-bottom>
   </div>
 </template>
 <script setup>
-import AreaTop from "./Area/AreaTop/index.vue";
+import TopItem from "./Area/AreaTop/TopItem.vue";
 import AreaBottom from "./Area/AreaBottom/index.vue";
-import { reactive, ref, watch } from "vue";
+import { reactive, ref, watch,getCurrentInstance } from "vue";
 import { store } from "@/store";
 import _ from "lodash";
 const props = defineProps({
@@ -19,12 +28,15 @@ const props = defineProps({
 });
 let topList = reactive([]);
 let allList = reactive([]);
+let curList = reactive([]);
 const bottomNum = ref(0);
 const chunkLength = ref(0);
 const handleTopClick = (id) => {
   bottomNum.value = id;
 };
-const emits = defineEmits(["nomore"]);
+const emits = defineEmits(["nomore", "resetPage"]);
+
+const instance = getCurrentInstance();
 watch(
   () => props.pageNum,
   (newValue, oldValue) => {
@@ -33,27 +45,32 @@ watch(
       emits("nomore", oldValue);
       return;
     }
-    topList = _.chunk(allList, 4)[newValue];
+    topList = _.chunk(curList, 4)[newValue];
   }
 );
 
 watch(
-  () => store.subCourseList,
+  () => store.currentSubjectId,
   (newValue, oldValue) => {
-    if (newValue.length != 0) {
-      allList.splice(0, allList.length);
-      allList = newValue;
-      if (allList.length > 4) {
-        chunkLength.value = _.chunk(allList, 4).length;
-      } else if (allList.length <= 4) {
-        chunkLength.value = 1;
-      }
-      console.log(allList,'all');
-      console.log(chunkLength,'length');
-    }
-  },
-  { deep: true }
+    emits("resetPage");
+    curList = allList.filter((item) => item.subjectId == newValue);
+    chunkLength.value = _.chunk(curList, 4).length;
+    topList = _.chunk(curList, 4)[0];
+    instance.ctx.$forceUpdate()
+  }
 );
+watch(
+  () => store.currentGradeId,
+  (newValue, oldValue) => {
+    emits("resetPage");
+    curList = allList.filter((item) => item.grade == newValue);
+    chunkLength.value = _.chunk(curList, 4).length;
+    topList = _.chunk(curList, 4)[0];
+    instance.ctx.$forceUpdate()
+  }
+);
+
+
 
 try {
   store.courseList.then((res) => {
@@ -61,6 +78,7 @@ try {
       if (res.length > 4) {
         res.forEach((item) => allList.push(item));
         chunkLength.value = _.chunk(allList, 4).length;
+        curList = allList;
         topList.splice(0, topList.length);
         topList = _.chunk(allList, 4)[0];
       } else {
@@ -68,6 +86,7 @@ try {
       }
       bottomNum.value = res[0].subjectId;
     }
+    return;
   });
 } catch (error) {}
 </script>
@@ -75,5 +94,12 @@ try {
 .center-area {
   flex: 1;
   margin: 0 15px;
+}
+.area-top {
+  width: 970px;
+  margin-top: 11px;
+  display: flex;
+  justify-content: flex-start;
+  transform: translateX(-10px);
 }
 </style>

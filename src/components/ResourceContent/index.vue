@@ -3,7 +3,11 @@
     <div class="left-arrow arrow" @click="prev">
       <img src="../../assets/left.svg" alt="lefticon" />
     </div>
-    <center-area :pageNum="pageNum" @nomore="onEmitNoMore"></center-area>
+    <center-area
+      :pageNum="pageNum"
+      @nomore="onEmitNoMore"
+      @resetPage="onEmitReset"
+    ></center-area>
     <div class="right-arrow arrow" @click="next">
       <img src="../../assets/right.svg" alt="righticon" />
     </div>
@@ -15,6 +19,9 @@ import { ref } from "vue";
 const pageNum = ref(0);
 const onEmitNoMore = (num) => {
   pageNum.value = num;
+};
+const onEmitReset = () => {
+  pageNum.value = 0;
 };
 const next = () => {
   pageNum.value++;

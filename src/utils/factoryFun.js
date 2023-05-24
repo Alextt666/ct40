@@ -54,6 +54,7 @@ const getSuperCourse = (params) => {
             subjectName: item.subjectName,
             courseName: item.name,
             cover: item.cover,
+            grade:item.grade
           };
         });
         resolve(options);
