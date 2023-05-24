@@ -15,11 +15,12 @@ const btns = reactive(
     { name: "远程协助", icon: "sunlight", nickId: "sunflower" },
     { name: "重启", icon: "restart", nickId: "restart" },
     { name: "关机", icon: "shutdown", nickId: "shutdown" },
-  ].map(({ name, icon }) => {
+  ].map(({ name, icon,nickId }) => {
     return {
       name,
       icon,
       url: `./images/btns/${icon}.png`,
+      nickId
     };
   })
 );
