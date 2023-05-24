@@ -54,6 +54,9 @@ watch(
     if (topList) {
       bottomNum.value = topList[0].id;
     }
+    if (!topList) {
+      ElMessage.error("没有当前选项的课程，请检查后台数据!");
+    }
     instance.ctx.$forceUpdate();
   }
 );
@@ -66,6 +69,9 @@ watch(
     topList = _.chunk(curList, 4)[0];
     if (topList) {
       bottomNum.value = topList[0].id;
+    }
+    if (!topList) {
+      ElMessage.error("没有当前选项的课程，请检查后台数据!");
     }
     instance.ctx.$forceUpdate();
   }

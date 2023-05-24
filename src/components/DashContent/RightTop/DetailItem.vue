@@ -6,7 +6,7 @@
           <img
             :src="src"
             alt="screenicon"
-            :class="[ pointWidth ? 'point' : smallWidth ? 'small' : '']"
+            :class="[pointWidth ? 'point' : smallWidth ? 'small' : '']"
           />
           <span> <slot></slot>{{ index + 1 }}</span>
         </div>
@@ -22,14 +22,22 @@
   </div>
 </template>
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, getCurrentInstance,watch } from "vue";
 const props = defineProps({
   list: Array,
   onlyText: Boolean,
   pointWidth: Boolean,
-  smallWidth:Boolean
+  smallWidth: Boolean,
 });
-const detailRenderList = props.list || [];
+let detailRenderList = props.list || [];
+const instance = getCurrentInstance();
+watch(
+  () => props.list,
+  (newVale) => {
+    detailRenderList = props.list
+    instance.ctx.$forceUpdate();
+  }
+);
 </script>
 <style lang="scss" scoped>
 .detail-item {

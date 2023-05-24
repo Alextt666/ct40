@@ -19,7 +19,7 @@
   </div>
 </template>
 <script setup>
-import { reactive, computed, toRefs } from "vue";
+import { reactive, computed, toRefs, isRef, ref } from "vue";
 import { HardStatus } from "@/utils/createImageUrl.js";
 import { getHardDeviceInfo } from "@/utils/getHardDeviceInfo.js";
 import DetailItem from "./DetailItem.vue";
@@ -33,14 +33,27 @@ const classyList = reactive([
 const screenStatus = new HardStatus("screen").createStatus();
 const cameraStatus = new HardStatus("camera").createStatus();
 const networkStatus = new HardStatus("net").createSingleStatus();
-const { diskUsed, diskFree,cameraNum,screenNum } = toRefs(reactive(getHardDeviceInfo()));
+let { diskUsed, diskFree, cameraNum, screenNum } = toRefs(
+  reactive(getHardDeviceInfo())
+);
+setInterval(() => {
+  const newHardDeviceInfo = getHardDeviceInfo();
+  diskUsed.value = newHardDeviceInfo.diskUsed;
+  diskFree.value = newHardDeviceInfo.diskFree;
+  cameraNum.value = newHardDeviceInfo.cameraNum;
+  screenNum.value = newHardDeviceInfo.screenNum;
+}, 2000);
 // 屏幕检测
 const screenList = computed(() => {
-  return screenStatus.filter((item) => item.status == screenNum.value)[0]?.src || [];
+  return (
+    screenStatus.filter((item) => item.status == screenNum.value)[0]?.src || []
+  );
 });
 // 相机检测
 const cameraList = computed(() => {
-  return cameraStatus.filter((item) => item.status == cameraNum.value)[0]?.src || [];
+  return (
+    cameraStatus.filter((item) => item.status == cameraNum.value)[0]?.src || []
+  );
 });
 // 网络检测
 const networkList = computed(() => {
